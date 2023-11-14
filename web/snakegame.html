@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #snake_game {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snake_game" width="400" height="400"></canvas>
+
+    <script>
+        var canvas = document.getElementById("snake_game");
+        var ctx = canvas.getContext("2d");
+
+        const circle = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 20,
+            velocityX: 0,
+            velocityY: 0,
+        };
+        const snakebody = {
+            bodyx: 3/ 2,
+            bodyy: 3 / 2,
+            radius: 20,
+            velocityX: 0,
+            velocityY: 0,
+        };
+
+        const food = {
+            foodx: 300 / 2,
+            foody: 100 / 2,
+            radius: 20,
+        };
+        
+
+        function drawCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.closePath();
+        }
+        function drawfood(){
+            ctx.beginPath();
+            ctx.arc(food.foodx, food.foody, food.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            ctx.closePath();
+        }
+        function eatfood(){
+            if(foodx === circle && foody === circle)
+            {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(20, 20, circle.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.closePath();
+            }
+        }
+        function body(){
+            if(drawfood == true)
+            {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
+                ctx.arc(snakebody.bodyx, snakebody.bodyy, circle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = "blue";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        function checkCollision() {
+            if (
+                circle.x - circle.radius <= 0 ||
+                circle.x + circle.radius >= canvas.width ||
+                circle.y - circle.radius <= 0 ||
+                circle.y + circle.radius >= canvas.height
+            ) {
+                // 원이 캔버스 경계에 닿으면 게임 종료
+                alert("게임 오버!");
+                clearInterval(gameLoop);
+            }
+        }
+
+        function update() {
+            // 원의 위치 업데이트
+            circle.x += circle.velocityX;
+            circle.y += circle.velocityY;
+
+            drawCircle();
+            
+            checkCollision();
+            drawfood();
+            body()
+            
+        }
+        canvas.addEventListener("mousemove", function (e) {
+            const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+            const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+
+            // 마우스 위치로 원의 속도 설정
+            circle.velocityX = (mouseX - circle.x) / 40;
+            circle.velocityY = (mouseY - circle.y) / 40;
+        });
+        canvas.addEventListener('click', function (e){
+            // 마우스 위치로 원의 속도 설정
+            const speed = 20;
+            circle.speed;
+            console.log("fast");
+        });
+        const gameLoop = setInterval(update, 10);
+    </script>
+</body>
+</html>
+
