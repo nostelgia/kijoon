@@ -25,7 +25,7 @@
 			//const geometry = new THREE.CylinderGeometry( 1, 1, 1, 32 ); 
 			const geometry = new THREE.SphereGeometry(1, 32, 32);
 
-			//VERTEXSHADER 가상의 3D 공간에 있는 꼭지점(vertex)들의 위치를 2차원 화면의 좌표로 변환하는 작업을 수행 
+			//VERTEXSHADER 가상의 3D 공간에 있는 꼭지점(vertex)들의 위치를 2차원 화면의 좌표로 변환하는 작업을 수행한다
 			//FREGMENTSHADER 오브젝트가 화면에서 차지하고 있는 모든 픽셀마다 실행되는 프로그램이며 보통 각 픽셀의 컬러를 계산하고 출력하기 위해 사용됩니다.
 			var vShader = document.getElementById('vertexShader').innerHTML;
 			var fShader = document.getElementById('fragmentShader').innerHTML;
